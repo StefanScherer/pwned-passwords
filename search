@@ -8,7 +8,6 @@ if [ ! -d /data ]; then
 fi
 
 FILES="pwned-passwords-1.0.txt pwned-passwords-update-1.txt"
-FILES="pwned-passwords-update-1.txt"
 for i in $FILES
 do
   if [ ! -f "/data/$i" ]; then
