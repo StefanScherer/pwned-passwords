@@ -26,10 +26,10 @@ Hash is B48CF0140BEA12734DB05EBCDB012F1D265BED84
 Found 1 occurrences in /data/pwned-passwords-1.0.txt
 ```
 
-Run the container without network
+Run the container without network and with read-only mounted volume (works after you have downloaded all files).
 
 ```
-$ docker run --rm -v $(pwd):/data --network none pwned-passwords yourpassword
+$ docker run --rm -v $(pwd):/data:ro --network none pwned-passwords yourpassword
 ```
 
 ## Acknowledgement
