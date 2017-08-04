@@ -1,0 +1,47 @@
+#!/bin/sh
+set -e
+
+if [ ! -d /data ]; then
+  echo "Please run this container with a volume mounted at /data."
+  echo "docker run --rm -v \ $(pwd):/data pwned-passwords $*"
+  exit 1
+fi
+
+FILES="pwned-passwords-1.0.txt pwned-passwords-update-1.txt"
+FILES="pwned-passwords-update-1.txt"
+for i in $FILES
+do
+  if [ ! -f "/data/$i" ]; then
+    echo "Downloading $i"
+    wget -O "/tmp/$i.7z" "https://downloads.pwnedpasswords.com/passwords/$i.7z"
+    echo "Extracting $i to /data"
+    7z x -o/data "/tmp/$i.7z"
+    rm "/tmp/$i.7z"
+  fi
+done
+
+if [[ $1 != "" ]]
+then
+PWD=$1
+else
+PWD="password"
+echo "checking $PWD"
+fi
+
+hash=`echo -n $PWD | openssl sha1 | awk '{print $2}' | awk 'BEGIN { getline; print toupper($0)  }'`
+echo "Hash is $hash"
+totalcount=0
+for i in $(sgrep -c $hash /data/*.txt)
+do
+  file=$(echo "$i" | cut -f1 -d:)
+  count=$(echo "$i" | cut -f2 -d:)
+  if [[ $count -ne 0 ]]; then
+    echo "Oh no - pwned! Found $count occurences in $file"
+  fi
+  totalcount=$(( $totalcount + $count ))
+done
+if [[ $totalcount -eq 0 ]]; then
+  echo "Good news - no pwnage found!"
+else
+  exit 1
+fi
