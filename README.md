@@ -18,10 +18,14 @@ Build the image:
 docker build -t pwned-passwords .
 ```
 
-Usage:
+## Usage
+
+### Mac / Linux
 
 ```
-$ docker run --rm -v $(pwd):/data pwned-passwords yourpassword
+$ mkdir pwned
+$ cd pwned
+$ docker run --rm -v $(pwd):/data stefanscherer/pwned-passwords yourpassword
 Hash is B48CF0140BEA12734DB05EBCDB012F1D265BED84
 Found 1 occurrences in /data/pwned-passwords-1.0.txt
 ```
@@ -29,7 +33,25 @@ Found 1 occurrences in /data/pwned-passwords-1.0.txt
 Run the container without network and with read-only mounted volume (works after you have downloaded all files).
 
 ```
-$ docker run --rm -v $(pwd):/data:ro --network none pwned-passwords yourpassword
+$ docker run --rm -v $(pwd):/data:ro --network none stefanscherer/pwned-passwords yourpassword
+```
+
+### Windows
+
+#### PowerShell
+
+```
+mkdir pwned
+cd pwned
+docker run --rm -v "$(pwd):/data" stefanscherer/pwned-passwords yourpass
+```
+
+#### CMD Shell
+
+```
+mkdir pwned
+cd pwned
+docker run --rm -v "%cd%:/data" stefanscherer/pwned-passwords yourpass
 ```
 
 ## Acknowledgement
