@@ -3,7 +3,7 @@ set -e
 
 if [ ! -d /data ]; then
   echo "Please run this container with a volume mounted at /data."
-  echo "docker run --rm -v \ $(pwd):/data pwned-passwords $*"
+  echo "docker run --rm -v \$(pwd):/data pwned-passwords $*"
   exit 1
 fi
 
