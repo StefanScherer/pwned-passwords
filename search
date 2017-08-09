@@ -19,9 +19,9 @@ do
   fi
 done
 
-if [[ $1 != "" ]]
+if [[ "$@" != "" ]]
 then
-PWD=$1
+PWD="$@"
 else
 PWD="password"
 echo "checking $PWD"
