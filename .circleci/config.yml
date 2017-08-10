@@ -6,26 +6,26 @@ jobs:
       # Prepare
       - checkout
       - run:
-        name: Update Docker
-        command: curl https://get.docker.com | sh
+          name: Update Docker
+          command: curl https://get.docker.com | sh
 
       # Build
       - run:
-        name: Build Docker image
-        command: docker build -t pwned-passwords .
+          name: Build Docker image
+          command: docker build -t pwned-passwords .
 
       # Test
       - run: Fake pwned passwords
-        command: |
-          touch pwned-passwords-update-1.txt pwned-passwords-update-1.txt
-          echo '5CE4ADBCDB902923FF8D63BA8ABD3625B684C9A6' > pwned-passwords-1.0.txt
-          echo '0FD08E694CEB8B9106007DBF9F7FF17BF47392BE' >>pwned-passwords-1.0.txt
+          command: |
+            touch pwned-passwords-update-1.txt pwned-passwords-update-1.txt
+            echo '5CE4ADBCDB902923FF8D63BA8ABD3625B684C9A6' > pwned-passwords-1.0.txt
+            echo '0FD08E694CEB8B9106007DBF9F7FF17BF47392BE' >>pwned-passwords-1.0.txt
       - run:
-        name: Test Docker image
-        command: docker run -v $(pwd):/data pwned-passwords CirclePassword
+          name: Test Docker image
+          command: docker run -v $(pwd):/data pwned-passwords CirclePassword
       - run:
-        name: Test Docker image
-        command: docker run -v $(pwd):/data pwned-passwords 'my badass password'
+          name: Test Docker image
+          command: docker run -v $(pwd):/data pwned-passwords 'my badass password'
 
       # Deploy
       - deploy:
