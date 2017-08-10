@@ -16,17 +16,8 @@ jobs:
 
       # Test
       - run:
-          name: Fake pwned passwords
-          command: |
-            echo 'F0D4031B7FBA0204D7DFF0D63198FA9369AE7073' > pwned-passwords-1.0.txt
-            touch pwned-passwords-update-1.txt
-            echo "pwned-passwords-update-2.txt will be downloaded by container"
-      - run:
           name: Test Docker image
-          command: docker run -v $(pwd):/data pwned-passwords CirclePassword | grep -c "Oh no"
-      - run:
-          name: Test Docker image
-          command: docker run -v $(pwd):/data pwned-passwords PasswordNotFound
+          command: ./test.sh
 
       # Deploy
       - deploy:
