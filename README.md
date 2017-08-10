@@ -38,6 +38,26 @@ Run the container without network and with read-only mounted volume (works after
 $ docker run --rm -v $(pwd):/data:ro --network none stefanscherer/pwned-passwords yourpassword
 ```
 
+#### Paranoid mode
+
+Typing passwords in your terminal stores them in your shell history. You can remove that from your shell history, for example with `sed -i 's/docker run.*pwned-passwords.*//' ~/.bash_history` on Linux.
+
+You can also run the container interactively to work inside a save place. The commands you type into the container isn't leaked to the host's shell history.
+
+```
+$ docker run --rm -it --entrypoint sh --network none -v $(pwd):/data:rw stefanscherer/pwned-passwords
+/ # search secret
+Hash is E5E9FA1BA31ECD1AE84F75CAAA474F3A663F05F4
+Oh no - pwned! Found 1 occurences in /data/pwned-passwords-1.0.txt
+/ # search supersecret123
+Hash is 21DDE79B804497E122F38DABC393F8E94F103CA6
+Oh no - pwned! Found 1 occurences in /data/pwned-passwords-1.0.txt
+/ # search absolutesupersecret123
+Hash is 9F14B0EBAE2CF106A8C8998B669BDC75DE5E1A2B
+Good news - no pwnage found!
+/ # exit
+```
+
 ### Windows
 
 #### PowerShell
