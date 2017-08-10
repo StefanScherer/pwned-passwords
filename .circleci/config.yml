@@ -15,7 +15,8 @@ jobs:
           command: docker build -t pwned-passwords .
 
       # Test
-      - run: Fake pwned passwords
+      - run:
+          name: Fake pwned passwords
           command: |
             touch pwned-passwords-update-1.txt pwned-passwords-update-1.txt
             echo '5CE4ADBCDB902923FF8D63BA8ABD3625B684C9A6' > pwned-passwords-1.0.txt
