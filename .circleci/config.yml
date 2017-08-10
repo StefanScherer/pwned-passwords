@@ -23,7 +23,7 @@ jobs:
             echo "pwned-passwords-update-2.txt will be downloaded by container"
       - run:
           name: Test Docker image
-          command: docker run -v $(pwd):/data pwned-passwords CirclePassword || true
+          command: docker run -v $(pwd):/data pwned-passwords CirclePassword | grep -c "Oh no"
       - run:
           name: Test Docker image
           command: docker run -v $(pwd):/data pwned-passwords PasswordNotFound
