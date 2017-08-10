@@ -45,7 +45,7 @@ Typing passwords in your terminal stores them in your shell history. You can rem
 You can also run the container interactively to work inside a save place. The commands you type into the container isn't leaked to the host's shell history.
 
 ```
-$ docker run --rm -it --entrypoint sh --network none -v $(pwd):/data:rw stefanscherer/pwned-passwords
+$ docker run --rm -it --entrypoint sh --network none -v $(pwd):/data:ro stefanscherer/pwned-passwords
 / # search secret
 Hash is E5E9FA1BA31ECD1AE84F75CAAA474F3A663F05F4
 Oh no - pwned! Found 1 occurences in /data/pwned-passwords-1.0.txt
