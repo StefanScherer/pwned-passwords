@@ -1,4 +1,6 @@
 # pwned-passwords
+[![CircleCI](https://circleci.com/gh/StefanScherer/pwned-passwords.svg?style=svg)](https://circleci.com/gh/StefanScherer/pwned-passwords)
+[![This image on DockerHub](https://img.shields.io/docker/pulls/stefanscherer/pwned-passwords.svg)](https://hub.docker.com/r/stefanscherer/pwned-passwords/)
 
 This Docker image can be used to search through the 320 million pwned passwords.
 See [https://haveibeenpwned.com/Passwords](https://haveibeenpwned.com/Passwords) for details.
