@@ -23,9 +23,19 @@ jobs:
       - deploy:
           name: Deploy Docker image
           command: |
-            export TAG=$(git describe --exact-match $CIRCLE_SHA1 2>/dev/null)
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            if [ "$CIRCLE_TAG" != "" ]; then
               docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
+              docker tag pwned-passwords stefanscherer/pwned-passwords:$CIRCLE_TAG
+              docker push stefanscherer/pwned-passwords:$CIRCLE_TAG
               docker tag pwned-passwords stefanscherer/pwned-passwords
               docker push stefanscherer/pwned-passwords
             fi
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
