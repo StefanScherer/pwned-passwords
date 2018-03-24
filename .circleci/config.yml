@@ -5,9 +5,6 @@ jobs:
     steps:
       # Prepare
       - checkout
-      - run:
-          name: Update Docker
-          command: curl https://get.docker.com | sh
 
       # Build
       - run:
