@@ -7,7 +7,7 @@ if [ ! -d /data ]; then
   exit 1
 fi
 
-FILES="pwned-passwords-1.0.txt pwned-passwords-update-1.txt pwned-passwords-update-2.txt"
+FILES="pwned-passwords-ordered-2.0.txt"
 for i in $FILES
 do
   if [ ! -f "/data/$i" ]; then
